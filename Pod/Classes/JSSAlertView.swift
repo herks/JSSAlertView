@@ -410,28 +410,29 @@ public class JSSAlertView: UIViewController {
 	}
 	
 	func closeView(withCallback:Bool, source:ActionType = .Close) {
-		UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
+		UIView.animateWithDuration(1, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [.CurveEaseOut], animations: {
 			self.containerView.center.y = self.view.center.y + self.viewHeight!
-			}, completion: { finished in
-				UIView.animateWithDuration(0.1, animations: {
-					self.view.alpha = 0
-					}, completion: { finished in
-						if withCallback {
-							if let action = self.closeAction where source == .Close {
-								action()
-							}
-							else if let action = self.cancelAction where source == .Cancel {
-								action()
-							}
-						}
-						if self.rootViewController.isKindOfClass(UITableViewController){
-							let tableViewController = self.rootViewController as! UITableViewController
-							tableViewController.tableView.scrollEnabled = true
-						}
-						self.removeView()
-				})
-				
+        }, completion: { finished in
 		})
+        
+        UIView.animateWithDuration(0.5, delay: 0.3, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [.CurveEaseInOut], animations: {
+            self.view.alpha = 0
+            }, completion: { finished in
+                if withCallback {
+                    if let action = self.closeAction where source == .Close {
+                        action()
+                    }
+                    else if let action = self.cancelAction where source == .Cancel {
+                        action()
+                    }
+                }
+                if self.rootViewController.isKindOfClass(UITableViewController){
+                    let tableViewController = self.rootViewController as! UITableViewController
+                    tableViewController.tableView.scrollEnabled = true
+                }
+                self.removeView()
+        })
+
 	}
 	
 	func removeView() {
