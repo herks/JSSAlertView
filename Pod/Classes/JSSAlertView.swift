@@ -240,8 +240,8 @@ public class JSSAlertView: UIViewController {
 	
 	
 	
-	public func info(viewController: UIViewController, title: String, text: String?=nil, buttonText: String?=nil, cancelButtonText: String?=nil) -> JSSAlertViewResponder {
-		let alertview = self.show(viewController, title: title, text: text, buttonText: buttonText, cancelButtonText: cancelButtonText, color: UIColorFromHex(0x3498db, alpha: 1))
+    public func info(viewController: UIViewController, title: String, text: String?=nil, buttonText: String?=nil, cancelButtonText: String?=nil, color: UIColor?=UIColorFromHex(0x3498db, alpha: 1)) -> JSSAlertViewResponder {
+		let alertview = self.show(viewController, title: title, text: text, buttonText: buttonText, cancelButtonText: cancelButtonText, color: color)
 		alertview.setTextTheme(.Light)
 		return alertview
 	}
